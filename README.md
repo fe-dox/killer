@@ -55,8 +55,8 @@ Jej szczegóły znajdziesz w pliku `LICENSE`
 
 #### W skrócie
 
- ```
-Copyright (C) 16/08/2019, 13:10  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+
+   Copyright (C) 16/08/2019, 13:10  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
 
      This program is free software: you can redistribute it and/or modify
      it under the terms of the GNU General Public License as published by
@@ -67,4 +67,3 @@ Copyright (C) 16/08/2019, 13:10  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
      GNU General Public License for more details.
-```
