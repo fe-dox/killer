@@ -1,0 +1,48 @@
+<!--
+  ~     Plik alives.html jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
+  ~     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
+  ~     Copyright (C) 15/08/2019, 20:02  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this file.  If not, see https://www.gnu.org/licenses/.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
+    <title>Killer Lista</title>
+</head>
+<body style="  text-align: center; font-size: 18px;  background: #222;
+    color: #ff5f5f;">
+<h2>Lista MARTWYCH</h2>
+<div id="data">
+
+</div>
+</body>
+<script>
+    let statedata = '<table style="margin: 0 auto">';
+    window.onload = () => {
+        fetch('./killed.php').then(function (response) {
+            return response.json();
+        }).then(function (myJson) {
+            for (let i = 0; i < myJson.length; i++) {
+                statedata = statedata + '<tr><td>' + myJson[i].name + '</td></tr>'
+                document.getElementById('data').innerHTML = statedata
+            }
+            statedata = +'</table>'
+        })
+    }
+</script>
+</html>

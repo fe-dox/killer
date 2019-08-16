@@ -1,0 +1,105 @@
+<!--
+  ~     Plik index.html jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
+  ~     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
+  ~     Copyright (C) 16/08/2019, 13:10  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this file.  If not, see https://www.gnu.org/licenses/.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
+    <title>Killer</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <input type="text" id="code-entry1" placeholder="Twoje ID"/>
+            <input style="display: none" type="text" id="code-entry2" placeholder="ID Celu"/>
+            <button id="button-check1">Uzyskaj Zlecenie</button>
+            <button style="background-color: red; display:none" id="button-check2">Zakończ Zlecenie</button>
+            <div id="error"></div>
+            <div id="target"></div>
+        </form>
+    </div>
+</div>
+<script>
+    let el1 = document.getElementById('code-entry1');
+    let el2 = document.getElementById('code-entry2');
+    let btn1 = document.getElementById('button-check1');
+    let btn2 = document.getElementById('button-check2');
+    let error = document.getElementById('error');
+    let target = document.getElementById('target');
+    btn1.addEventListener('click', e => {
+        e.preventDefault();
+        let code = el1.value;
+        fetch('./endpoint.php?code=' + code)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                if (myJson.name == false) {
+                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej MI7';
+                    target.innerHTML = '';
+                    btn2.style.display = "none";
+                    btn1.style.display = "block";
+
+                    el2.style.display = "none";
+                    el1.style.display = "block";
+                } else {
+                    error.innerHTML = '';
+                    target.innerHTML = 'Witaj agencie ' + myJson.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + myJson.kill + '</span>';
+                    btn1.style.display = "none";
+                    btn2.style.display = "block";
+
+                    el2.style.display = "block";
+                    el1.style.display = "none";
+                }
+            });
+    });
+    btn2.addEventListener('click', e => {
+        e.preventDefault();
+        let code = el1.value;
+        fetch('./endpoint.php?code=' + code)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (myJson) {
+                if (myJson.name == false) {
+                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej MI7'
+                    target.innerHTML = ''
+                    btn2.style.display = "none";
+                    btn1.style.display = "block";
+
+                    el2.style.display = "none";
+                    el1.style.display = "block";
+                } else {
+                    error.innerHTML = ''
+                    target.innerHTML = 'Witaj agencie ' + myJson.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + myJson.kill + '</span>';
+                    btn1.style.display = "none";
+                    btn2.style.display = "block";
+
+                    el2.style.display = "block";
+                    el1.style.display = "none";
+                }
+            });
+    });
+</script>
+</body>
+</html>
