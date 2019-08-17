@@ -13,6 +13,7 @@ Procedura jest bardzo prosta, da się ją zamknąć w kilku punktach
  
 #### Wymagania
 * NodeJS >= 8 - do generowania kodów
+* npm >= 4 - do pobrania modułów (może być yarn / inny menadżer modułów NodeJS)
 * PHP >= 7 (pzbsowe jest ok) - do obsługi stron
 
 #### Przygotowanie Plików
@@ -28,12 +29,13 @@ Mikołaj Bogucki
 ```
 
 #### Gnerowanie 
-1. W katalogu zawierającym plik `killer.csv` oraz `app.js` uruchamiamy cmd i wywołujemy polecenie `node app.js`
-2. Kopiujemy utworzony plik `data.json` i umieszczamy go w folderze na serwerze
-3. Drukujemy listę znajdującą się w pliku `print.html`
+1. Uruchamiamy cmd w katalogu zawierającym plik `app.js` i wykonujemy komendę `npm i`
+2. Następnie wywołujemy polecenie `node app.js`
+3. Kopiujemy utworzony plik `data.json` i umieszczamy go w folderze na serwerze
+4. Drukujemy listę znajdującą się w pliku `print.html`
 
 #### Rozdawanie karteczek
-Tniemy dopiero co wydrukowaną listę na paski i wręczamy kod osobie, której nazwisko znajduję się po jego lewej stronie
+Tniemy dopiero co wydrukowaną listę na paski i wręczamy kod osobie, której nazwisko znajduję się po lewej stronie kodu
 
 ![IMG](https://fedox.pl/i/1TNjePRQ8Vx6gsmV)
 
