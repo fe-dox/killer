@@ -12,9 +12,9 @@ Dzięki zastosowaniu naszego generatora i systemu do obsługi gry poprzez stron�
 Procedura jest bardzo prosta, da się ją zamknąć w kilku punktach
  
 #### Wymagania
-* NodeJS >= 8 - do generowania kodów
-* npm >= 4 - do pobrania modułów (może być yarn / inny menadżer modułów NodeJS)
-* PHP >= 7 (pzbsowe jest ok) - do obsługi stron
+* [NodeJS](https://nodejs.org/en/download/) >= 8 - do generowania kodów
+* npm >= 5 - do pobrania modułów, powinien zainstalować się wraz z NodeJS
+* [PHP](https://www.php.net/) >= 7 - do obsługi stron, powinien być zainstalowany na większości hostingów
 
 #### Przygotowanie Plików
 1. Kopiujemy zawartość folderu web do swojego folderu na serwerze
@@ -49,6 +49,9 @@ W ostateczności można kontaktować się z którymś z autorów
 
 # Autorzy
 [Mikołaj Bogucki](https://www.facebook.com/mmbogus) i [Jeremiasz Mazur](https://www.facebook.com/profile.php?id=100010091221795) pod natchnieniem i nadzorem [Ani Basiury](https://www.facebook.com/profile.php?id=100013693023314)
+
+Będzie nam miło jeśli podzielisz się jakimiś spostrzeżeniami, bądź po prostu pochwalisz się gdzie zastosowałeś nasz system.
+Zachęcamy również do ulepszania tego projektu i dodawania nowych funkcji, jednakże prosimy by stronę serwerową ograniczyć do PHP ze względu na fakt, że ten język jest wspierany przez większość hostingów.
 
 # Licencja
 Udostępniamy naszego serwerowego killera głównie z myślą o kolejnych osobach prowadzących obozy brydżowe w Stasikówce,
