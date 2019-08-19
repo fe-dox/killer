@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /
+
+
+# Protect log.txt
+<Files "data.json">
+Order Allow,Deny
+Deny from all
+</Files>
+
+# Protect log.txt
+<Files "killed.json">
+Order Allow,Deny
+Deny from all
+</Files>
