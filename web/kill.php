@@ -36,6 +36,7 @@ if($player == null){
     $target_player["killCode"] = false;
     $target_player["code"] = false;
     $target_player["killCount"] = 0;
+    $target_player["isDead"] = false;
     $target_player["killer"] = $player["name"];
     $json_data[$target] = $target_player;
     $json_data[$code] = $player;
