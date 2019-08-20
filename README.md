@@ -18,9 +18,10 @@ Procedura jest bardzo prosta, da się ją zamknąć w kilku punktach
 
 #### Przygotowanie Plików
 1. Kopiujemy zawartość folderu web do swojego folderu na serwerze
-2. W tym samym ktalogu co plik `app.js` umieszczamy plik `killer.csv` zawierający listę zawodników 
+2. W tym samym ktalogu co plik `app.js` umieszczamy plik `killer.csv` zawierający listę zawodników zaczynąjącą się nagłówkiem `names` 
 Przykładowa zawartośc pliku `killer.csv`:
 ```csv
+names
 Laura Cichoń
 Agata Warunek
 Gaba Kroner
