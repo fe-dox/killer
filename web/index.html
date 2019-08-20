@@ -1,7 +1,7 @@
 <!--
   ~     Plik index.html jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
   ~     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
-  ~     Copyright (C) 20/08/2019, 12:54  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+  ~     Copyright (C) 20/08/2019, 13:23  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
   ~
   ~     This program is free software: you can redistribute it and/or modify
   ~     it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="alives">
-    <a href="alives.html">Lista Martwych -></a>
+    <a href="alives.html">Leadeboard -></a>
 </div>
 <div class="login-page">
     <div class="form">
@@ -50,7 +50,8 @@
     let btn2 = document.getElementById('button-check2');
     let error = document.getElementById('error');
     let target = document.getElementById('target');
-    function fetchTarget () {
+
+    function fetchTarget() {
         let code = el1.value;
         fetch('./endpoint.php?code=' + code)
             .then(function (response) {
@@ -76,6 +77,7 @@
                 }
             });
     }
+
     btn1.addEventListener('click', e => {
         e.preventDefault();
         fetchTarget()
@@ -94,6 +96,7 @@
                     error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej'
                 } else {
                     error.innerHTML = '';
+                    el2.value = '';
                     target.innerHTML = 'Zabicie celu zakończone pomyślnie';
                     fetchTarget();
                 }

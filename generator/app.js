@@ -1,7 +1,7 @@
 /*
  *     Plik app.js jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 16/08/2019, 15:38  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 20/08/2019, 19:00  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -36,14 +36,16 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
+
     return array;
 }
 
+
 const raw = fs.readFileSync('./killer.csv', 'UTF-8');
-let tmp = csv(raw, {ltrim: true});
-let players =[];
+let tmp = csv(raw);
 tmp.shift();
-tmp.forEach(o=> players.push({name: o[0]}));
+let players = [];
+tmp.forEach(o => players.push({name: o[0]}));
 players = shuffle(players);
 const htmlStream = fs.createWriteStream('./list.html');
 const printStream = fs.createWriteStream('./print.html');
@@ -64,8 +66,6 @@ for (let i = 0; i < players.length; i++) {
     player.killCode = i === players.length - 1 ? players[0].code : players[i + 1].code;
     explayers[player.code] = player;
 }
-console.log(explayers);
-
 fs.writeFileSync('./data.json', JSON.stringify(explayers), {encoding: 'utf-8'});
 shuffle(players);
 for (let i = 0; i < players.length; i++) {
