@@ -51,7 +51,7 @@ W ostateczności można kontaktować się z którymś z autorów
 Plik `.htaccess` zawiera zasady bezpieczeństwa blokujące dostęp do plików `data.json` oraz `killed.json` jednakże nie jest on kompatybilny z każdym serwerem (z serwerem pzbs jest) i może wystąpić potrzeba zastąpienia go odpowiednią metodą blokowania możliwości odczytu danych
 Jeżeli nie masz pojęcia jak to zrobić a domyślna metoda nie działa możesz:
 
-- Wyszukać metodę blokowania dostępu do plików (ex. `how to protect file from read <nazwa twojego serwera`)
+- Wyszukać metodę blokowania dostępu do plików (ex. `how to protect file from read <nazwa twojego serwera>`)
 - Zmienić nazwę pliku `data.json` na jakąś inną, a następnie odpowiednio zmienić pliki obsługujące backend
 - Olać bezpieczeństwo - wtedy każdy gracz, który sprawdzi to repozytorium i nie jest idiotą będzie wstanie odczytać zawartość pliku przechowywującego informacje o stanie gry i zawodnikach
 
