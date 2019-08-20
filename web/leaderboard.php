@@ -2,7 +2,7 @@
 /**
  *     Plik leaderboard.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 20/08/2019, 20:37  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 20/08/2019, 20:42  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -25,4 +25,5 @@ foreach ($data as $key => $player){
     $tmp["killCount"] = $player["killCount"];
     $result[] = $tmp;
 }
-echo json_encode(shuffle($result));
+shuffle($result);
+echo json_encode($result);
