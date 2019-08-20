@@ -2,7 +2,7 @@
 /**
  *     Plik kill.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 15/08/2019, 21:31  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 20/08/2019, 12:55  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -35,8 +35,7 @@ if($player == null){
     $target_player["kill"] = false;
     $target_player["killCode"] = false;
     $target_player["code"] = false;
-    $target_player["killCount"] = 0;
-    $target_player["isDead"] = false;
+    $target_player["isDead"] = true;
     $target_player["killer"] = $player["name"];
     $json_data[$target] = $target_player;
     $json_data[$code] = $player;

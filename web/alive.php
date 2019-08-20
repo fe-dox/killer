@@ -2,7 +2,7 @@
 /**
  *     Plik alive.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 19/08/2019, 21:42  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 20/08/2019, 12:55  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -19,10 +19,11 @@
  */
 
 $json = file_get_contents("data.json");
+echo $json;
 $data = json_decode($json, true);
 $result = [];
 foreach ($data as $player){
-    if($player["isDead"] == false){
+    if($player["isDead"] != true){
         $tmp["name"] = $player["name"];
         $tmp["killCount"] = $player["killCount"];
         $result[] = $tmp;
