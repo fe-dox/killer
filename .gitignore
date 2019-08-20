@@ -1,2 +1,6 @@
 .idea/
-./generator/node_modules/
+generator/node_modules
+generator/data.json
+generator/list.html
+generator/killer.csv
+generator/print.html
