@@ -1,7 +1,7 @@
 <!--
   ~     Plik index.html jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
   ~     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
-  ~     Copyright (C) 16/08/2019, 13:10  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+  ~     Copyright (C) 20/08/2019, 12:54  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
   ~
   ~     This program is free software: you can redistribute it and/or modify
   ~     it under the terms of the GNU General Public License as published by
@@ -23,10 +23,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
     <title>Killer</title>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="./main.css">
     <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#222">
 </head>
 <body>
+<div class="alives">
+    <a href="alives.html">Lista Martwych -></a>
+</div>
 <div class="login-page">
     <div class="form">
         <form class="login-form">
@@ -46,8 +50,7 @@
     let btn2 = document.getElementById('button-check2');
     let error = document.getElementById('error');
     let target = document.getElementById('target');
-    btn1.addEventListener('click', e => {
-        e.preventDefault();
+    function fetchTarget () {
         let code = el1.value;
         fetch('./endpoint.php?code=' + code)
             .then(function (response) {
@@ -55,7 +58,7 @@
             })
             .then(function (myJson) {
                 if (myJson.name == false) {
-                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej MI7';
+                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej';
                     target.innerHTML = '';
                     btn2.style.display = "none";
                     btn1.style.display = "block";
@@ -72,34 +75,31 @@
                     el1.style.display = "none";
                 }
             });
+    }
+    btn1.addEventListener('click', e => {
+        e.preventDefault();
+        fetchTarget()
     });
     btn2.addEventListener('click', e => {
         e.preventDefault();
         let code = el1.value;
-        fetch('./endpoint.php?code=' + code)
+        let code2 = el2.value;
+        fetch('./kill.php?code=' + code + '&target=' + code2)
             .then(function (response) {
                 return response.json();
             })
             .then(function (myJson) {
-                if (myJson.name == false) {
-                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej MI7'
-                    target.innerHTML = ''
-                    btn2.style.display = "none";
-                    btn1.style.display = "block";
-
-                    el2.style.display = "none";
-                    el1.style.display = "block";
+                console.log(myJson);
+                if (!myJson.name) {
+                    error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej'
                 } else {
-                    error.innerHTML = ''
-                    target.innerHTML = 'Witaj agencie ' + myJson.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + myJson.kill + '</span>';
-                    btn1.style.display = "none";
-                    btn2.style.display = "block";
-
-                    el2.style.display = "block";
-                    el1.style.display = "none";
+                    error.innerHTML = '';
+                    target.innerHTML = 'Zabicie celu zakończone pomyślnie';
+                    fetchTarget();
                 }
             });
     });
 </script>
+<div class="source-page"><a href="https://bitbucket.org/fedox8/boom-killer/src/master/">SOURCE</a></div>
 </body>
 </html>
