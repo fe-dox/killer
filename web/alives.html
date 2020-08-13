@@ -51,7 +51,7 @@
         fetch('./killed.php').then((res) => {
             return res.json();
         }).then((json) => {
-            for (let person in json) {
+            for (let person of json) {
                 killedData += `<tr><td>${person.name}</td><td>${person.killCount}</td></tr>`;
                 document.getElementById('killedData').innerHTML = killedData
             }
@@ -62,7 +62,7 @@
         fetch('./alive.php').then((res) => {
             return res.json();
         }).then((json) => {
-            for (let person in json) {
+            for (let person of json) {
                 aliveData += `<tr><td>${person.name}</td><td>${person.killCount}</td></tr>`;
                 document.getElementById('aliveData').innerHTML = aliveData
             }
