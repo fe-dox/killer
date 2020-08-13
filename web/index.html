@@ -58,16 +58,15 @@
     function fetchTarget() {
         let code = el1.value;
         fetch('./endpoint.php?code=' + code)
-            .then(function (response) {
-                return response.json();
+            .then((res) => {
+                return res.json();
             })
-            .then(function (myJson) {
-                if (myJson.name == false) {
+            .then(function (json) {
+                if (json.name === false) {
                     error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej';
                     target.innerHTML = '';
                     btn2.style.display = "none";
                     btn1.style.display = "block";
-
                     el2.style.display = "none";
                     el1.style.display = "block";
                 } else {
@@ -75,7 +74,6 @@
                     target.innerHTML = 'Witaj agencie ' + myJson.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + myJson.kill + '</span>';
                     btn1.style.display = "none";
                     btn2.style.display = "block";
-
                     el2.style.display = "block";
                     el1.style.display = "none";
                 }
@@ -95,13 +93,12 @@
                 return response.json();
             })
             .then(function (myJson) {
-                console.log(myJson);
                 if (!myJson.name) {
                     error.innerHTML = 'Kod który podałeś nie został odnaleziony w bazie operacyjnej'
                 } else {
                     error.innerHTML = '';
                     el2.value = '';
-                    target.innerHTML = 'Zabicie celu zakończone pomyślnie';
+                    target.innerHTML = 'Zabicie celu zakończone sukcesem';
                     fetchTarget();
                 }
             });
