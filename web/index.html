@@ -34,18 +34,21 @@
 <div class="login-page">
     <div class="form">
         <form class="login-form">
-            <input type="text" id="code-entry1" placeholder="Twoje ID"/>
-            <input style="display: none" type="text" id="code-entry2" placeholder="ID Celu"/>
+            <input autocomplete="off" type="text" id="code-entry1" placeholder="Twoje ID"/>
+            <input autocomplete="off" style="display: none" type="text" id="code-entry2" placeholder="ID Celu"/>
             <button id="button-check1">Uzyskaj Zlecenie</button>
             <button style="background-color: red; display:none" id="button-check2">Zakończ Zlecenie</button>
             <div id="error"></div>
             <div id="target"></div>
         </form>
     </div>
-  <div style="color:white">
-<h1 style="font-weight: 100;">MiniPomoc</h1>Aby dowiedzieć się kogo musisz wyeliminować, wpisz swój kod powyżej.<br><br>Aby poinformować system o eliminacji, wpisz swój kod, a następnie kod który miała ofiara<br><br>
-<h1 style="font-weight: 100;">Zasady</h1>1. Nie zabijamy w trakcie grania w brydża.<br>2. Aby kogoś zabić, ktoś musi wziąć świadomie(nie bezwarunkowo) wszystkie przedmioty z ręki zabójcy (podawanie ciastek z pudełka się nie liczy)
-</div>
+    <div style="color:white">
+        <h1 style="font-weight: 100;">MiniPomoc</h1>Aby dowiedzieć się kogo musisz wyeliminować, wpisz swój kod powyżej.<br><br>Aby
+        poinformować system o eliminacji, wpisz swój kod, a następnie kod który miała ofiara<br><br>
+        <h1 style="font-weight: 100;">Zasady</h1>1. Nie zabijamy w trakcie grania w brydża.<br>2. Aby kogoś zabić, ktoś
+        musi wziąć świadomie(nie bezwarunkowo) wszystkie przedmioty z ręki zabójcy (podawanie ciastek z pudełka się nie
+        liczy)
+    </div>
 </div>
 <script>
     let el1 = document.getElementById('code-entry1');
@@ -56,7 +59,6 @@
     let target = document.getElementById('target');
 
     function fetchTarget() {
-        let code = el1.value;
         fetch('./endpoint.php?code=' + code)
             .then((res) => {
                 return res.json();
@@ -70,8 +72,13 @@
                     el2.style.display = "none";
                     el1.style.display = "block";
                 } else {
+                    let code = el1.value;
+                    const twoWeeksFromNow = Date.now() + 1209600000;
+                    const twoWeeksFromNowDate = new Date(twoWeeksFromNow)
+                    document.cookie = 'code=' + code + '; expires=' + twoWeeksFromNowDate.toUTCString() + ';'
+
                     error.innerHTML = '';
-                    target.innerHTML = 'Witaj agencie ' + myJson.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + myJson.kill + '</span>';
+                    target.innerHTML = 'Witaj agencie ' + json.name + '<br />' + 'Twój cel to: ' + '<span style="color:red">' + json.kill + '</span>';
                     btn1.style.display = "none";
                     btn2.style.display = "block";
                     el2.style.display = "block";
@@ -103,6 +110,25 @@
                 }
             });
     });
+    function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i <ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) === ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) === 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    window.onload = () => {
+        el1.value = getCookie("code");
+    }
+
 </script>
 <div class="source-page"><a href="https://github.com/fe-dox/killer/">SOURCE</a></div>
 </body>
