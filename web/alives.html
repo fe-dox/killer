@@ -23,7 +23,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
     <title>Leaderboard</title>
-
     <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#222">
 </head>
@@ -35,7 +34,7 @@
  text-align: center;
  font-size: 18px;
     color: #ff5f5f;">
-<h2>Leaderboard</h2>
+<h2 style="font-weight: normal">Leaderboard</h2>
 <div style="display: flex; justify-content: space-evenly">
     <div id="aliveData">
 
@@ -47,18 +46,20 @@
 </body>
 <script>
     window.onload = () => {
-        let killedData = '<h3>Już martwi</h3><table style="margin: 0 auto">';
+        let killedData = '<h3 style="font-weight: normal">Już martwi</h3><table style="margin: 0 auto">';
         fetch('./killed.php').then((res) => {
             return res.json();
         }).then((json) => {
             for (let person of json) {
-                killedData += `<tr><td>${person.name}</td><td>${person.killCount}</td></tr>`;
+
+                killedData += `<tr> <td>${person.name}</td><td>${person.killCount}</td></tr>`;
+
                 document.getElementById('killedData').innerHTML = killedData
             }
             killedData += '</table>'
         });
 
-        let aliveData = '<h3>Jeszcze żywi</h3><table style="margin: 0 auto">';
+        let aliveData = '<h3 style="font-weight: normal">Jeszcze żywi</h3><table style="margin: 0 auto">';
         fetch('./alive.php').then((res) => {
             return res.json();
         }).then((json) => {
