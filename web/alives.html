@@ -51,7 +51,9 @@
             return res.json();
         }).then((json) => {
             for (let person of json) {
+
                 killedData += `<tr> <td>${person.name}</td><td>${person.killCount}</td></tr>`;
+
                 document.getElementById('killedData').innerHTML = killedData
             }
             killedData += '</table>'
