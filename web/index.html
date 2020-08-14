@@ -58,6 +58,7 @@
     let error = document.getElementById('error');
     let target = document.getElementById('target');
 
+    let code = el1.value;
     function fetchTarget() {
         fetch('./endpoint.php?code=' + code)
             .then((res) => {
@@ -72,7 +73,6 @@
                     el2.style.display = "none";
                     el1.style.display = "block";
                 } else {
-                    let code = el1.value;
                     const twoWeeksFromNow = Date.now() + 1209600000;
                     const twoWeeksFromNowDate = new Date(twoWeeksFromNow)
                     document.cookie = 'code=' + code + '; expires=' + twoWeeksFromNowDate.toUTCString() + ';'
