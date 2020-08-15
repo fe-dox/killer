@@ -20,18 +20,16 @@
 const fs = require('fs');
 const csv = require('csv-parse/lib/sync');
 const md5 = require('md5');
+const _ = require('lodash');
 
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
 
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
@@ -42,15 +40,21 @@ function shuffle(array) {
 
 
 const raw = fs.readFileSync('./killer.csv', 'UTF-8');
+
+let explayers = {};
+
+let players = [];
 let tmp = csv(raw);
 tmp.shift();
-let players = [];
 tmp.forEach(o => players.push({name: o[0]}));
 players = shuffle(players);
+
 const htmlStream = fs.createWriteStream('./list.html');
 const printStream = fs.createWriteStream('./print.html');
-htmlStream.write('<html lang="pl"><head><meta charset="utf-8"></head><body><table><thead><tr><td>GRACZ</td><td>ZLECENIE</td></tr></thead>');
-printStream.write('<html lang="pl"><head><meta charset="utf-8"></head><body><table><thead><tr><td>GRACZ</td><td>KOD</td></tr></thead>');
+
+htmlStream.write('<html lang="pl"><head><meta charset="utf-8"><title>Pętla Zabójstw</title></head><body><table><thead><tr><td>GRACZ</td><td>ZLECENIE</td></tr></thead>');
+printStream.write('<html lang="pl"><head><meta charset="utf-8"><title>Lista Kodów</title></head><body><table><thead><tr><td>GRACZ</td><td>KOD</td></tr></thead>');
+
 for (let i = 0; i < players.length; i++) {
     players[i] = {
         name: players[i].name,
@@ -60,16 +64,19 @@ for (let i = 0; i < players.length; i++) {
     };
     htmlStream.write(`<tr><td>${players[i].name}</td><td>${players[i].kill}</td></tr>`);
 }
-let explayers = {};
+
 for (let i = 0; i < players.length; i++) {
     let player = players[i];
     player.killCode = i === players.length - 1 ? players[0].code : players[i + 1].code;
     explayers[player.code] = player;
 }
+
 fs.writeFileSync('./data.json', JSON.stringify(explayers), {encoding: 'utf-8'});
-shuffle(players);
+
+players = _.sortBy(players, o => o.name.split(" ")[1]);
+
 for (let i = 0; i < players.length; i++) {
-    printStream.write(`<tr><td>${players[i].name}</td><td>${players[i].code}</td></tr>`);
+    printStream.write(`<tr><td> - ${players[i].name}</td><td>${players[i].code}</td></tr>`);
 }
 htmlStream.write('</table></body></html>');
 printStream.write('</table></body></html>');
