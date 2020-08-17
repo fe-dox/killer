@@ -1,0 +1,126 @@
+<!--
+  ~     Plik index.html jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
+  ~     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
+  ~     Copyright (C) 20/08/2019, 13:23  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+  ~
+  ~     This program is free software: you can redistribute it and/or modify
+  ~     it under the terms of the GNU General Public License as published by
+  ~     the Free Software Foundation, either version 3 of the License, or
+  ~     (at your option) any later version.
+  ~
+  ~     This program is distributed in the hope that it will be useful,
+  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~     GNU General Public License for more details.
+  ~
+  ~     You should have received a copy of the GNU General Public License
+  ~     along with this file.  If not, see https://www.gnu.org/licenses/.
+  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
+    <title>Killer</title>
+    <link rel="stylesheet" href="./main.css">
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#222">
+</head>
+<body>
+<style>
+    .targetName{
+        visibility: hidden;
+    }
+    .targetName:hover{
+        visibility: visible;
+    }
+</style>
+<div id="login-page" class="login-page">
+    <div class="form">
+        <form class="login-form">
+            <input type="password" autocomplete="off" id="password" placeholder="Hasło"/>
+            <button id="login">Zaloguj</button>
+            <div id="error"></div>
+        </form>
+    </div>
+</div>
+<div id="admin-page" style="display: none"></div>
+<script>
+    let isLogged = false;
+    const passwordInput = document.getElementById('password');
+    const loginButton = document.getElementById('login');
+    const error = document.getElementById('error');
+
+    const loginPage = document.getElementById('login-page')
+    const adminPage = document.getElementById('admin-page')
+
+    let localJson = null;
+
+    function getJson(){
+        fetch('./admin.php?password=' + passwordInput.value)
+            .then((res) => {
+                return res.json();
+            }).catch(() => {
+
+        }).then((json) => {
+            isLogged = true;
+            error.innerText = "";
+            loginPage.style.display = "none"
+            localJson = json;
+            let adminPageContent = '<div>'
+            for (let i = 0; i < localJson.length; i++) {
+                adminPageContent += '<div id="person "' + i + '>'+ '<button class="killButton">KILL</button><div class="name">' + localJson[i].name + ' ' + localJson[i].code + '</div><div class="targetName">' + localJson[i].kill + '</div></div>'
+            }
+            adminPageContent += '</div>'
+            adminPage.innerHTML = adminPageContent;
+            adminPage.style.display = "block"
+        })
+    }
+    function sendJson(){
+        fetch('./admin.php?password=' + passwordInput.value, {method: 'POST', body: JSON.stringify(localJson)})
+    }
+    loginButton.addEventListener('click', e => {
+        e.preventDefault();
+        getJson();
+    });
+
+
+    if (document.addEventListener) {
+        document.addEventListener("click", handleClick, false);
+    }
+    else if (document.attachEvent) {
+        document.attachEvent("onclick", handleClick);
+    }
+    function handleClick(event) {
+        event = event || window.event;
+        event.target = event.target || event.srcElement;
+        var element = event.target;
+        // Climb up the document tree from the target of the event
+        while (element) {
+            if (element.nodeName === "BUTTON" && /killButton/.test(element.className)) {
+                // The user clicked on a <button> or clicked on an element inside a <button>
+                // with a class name called "foo"
+                kill(element);
+                break;
+            }
+            element = element.parentNode;
+        }
+    }
+    function kill(button) {
+        let id = button.parentNode.id.split(" ").pop();
+        let targetPos = localJson.find(p =>{
+            p.code = localJson[id].killCode;
+        }).index
+        localJson[id].killCode = target.killCode;
+        localJson[id].kill = target.kill;
+        localJson[targetPos].isDead = true;
+        localJson[id].killCount++;
+        sendJson()
+        // do something with button
+    }
+
+</script>
+<div class="source-page"><a href="https://github.com/fe-dox/killer/">SOURCE</a></div>
+</body>
+</html>
