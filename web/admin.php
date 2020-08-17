@@ -2,7 +2,7 @@
 /*
  *     Plik admin.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 17/08/2020, 17:12  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 17/08/2020, 18:07  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -18,6 +18,16 @@
  *     along with this file.  If not, see https://www.gnu.org/licenses/.
  */
 
+
+
+function json_validator($data=NULL) {
+    if (!empty($data)) {
+        @json_decode($data);
+        return (json_last_error() === JSON_ERROR_NONE);
+    }
+    return false;
+}
+
 $PASSWORD = "Twoje Pasło";
 $IS_ACTIVE = true;
 $entered_password = $_GET["password"];
@@ -31,14 +41,14 @@ if (!$IS_ACTIVE) {
         http_response_code(403);
     } else {
         if (empty($inData)) {
-            $json = file_get_contents("data.json");
-            $data = json_decode($json, true);
-            echo json_encode($data);
+            $data = file_get_contents("data.json");
+            echo $data;
         } else {
-            $data = json_decode($inData);
-            $jsonString = json_encode($data);
-            file_put_contents("data.json", $jsonString);
-            echo true;
+            if (json_validator($inData)){
+                file_put_contents("data.json", $inData);
+                echo "{\"Success\":true}";
+            }
+            echo "{\"Success\":false}";
         }
     }
 }
