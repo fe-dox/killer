@@ -1,5 +1,5 @@
 ## Killer - Co to?
-Gra w swojej pierwotnej wersji polegała na rozdaniu graczom karteczek (jedna na gracza) z iminiem i nazwiskiem ich celu.
+Gra w swojej pierwotnej wersji polegała na rozdaniu graczom karteczek (jedna na gracza) z imieniem i nazwiskiem ich celu.
 Celem gry jest wyeliminowanie wszystkich pozostałych graczy.
 Zabójstwa można dokonać w umówiony sposób np. trzeba podać przedmiot lewą ręką, lub być w jakimś pomieszczeniu sam na sam.
 Tak naprawdę sposób moż być dowolny.

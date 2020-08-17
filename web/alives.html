@@ -22,43 +22,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
-    <title>Killer Lista</title>
+    <title>Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
     <meta name="theme-color" content="#222">
 </head>
-<body style="  text-align: center; font-size: 18px;  background: #222;
+<body style="
+    background: #222;
+    font-family: 'VT323', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+ text-align: center;
+ font-size: 18px;
     color: #ff5f5f;">
-<h2>Leaderboard</h2>
+<h2 style="font-weight: normal">Leaderboard</h2>
 <div style="display: flex; justify-content: space-evenly">
-    <div id="data">
+    <div id="aliveData">
 
     </div>
-    <div id="data2">
+    <div id="killedData">
 
     </div>
 </div>
 </body>
 <script>
-    let statedata = '<h3>Jeszcze żywi</h3><table style="margin: 0 auto">';
-    let statedata2 = '<h3>Już Martwi</h3><table style="margin: 0 auto">';
-
     window.onload = () => {
-        fetch('./killed.php').then(function (response) {
-            return response.json();
-        }).then(function (myJson) {
-            for (let i = 0; i < myJson.length; i++) {
-                statedata = statedata + `<tr><td>${myJson[i].name}</td><td>${myJson[i].killCount}</td></tr>`;
-                document.getElementById('data').innerHTML = statedata
+        let killedData = '<h3 style="font-weight: normal">Już martwi</h3><table style="margin: 0 auto">';
+        fetch('./killed.php').then((res) => {
+            return res.json();
+        }).then((json) => {
+            for (let person of json) {
+
+                killedData += `<tr> <td>${person.name}</td><td>${person.killCount}</td></tr>`;
+
+                document.getElementById('killedData').innerHTML = killedData
             }
-            statedata = +'</table>'
+            killedData += '</table>'
         });
-        fetch('./alive.php').then(function (response) {
-            return response.json();
-        }).then(function (myJson) {
-            for (let i = 0; i < myJson.length; i++) {
-                statedata2 = statedata2 + `<tr><td>${myJson[i].name}</td><td>${myJson[i].killCount}</td></tr>`;
-                document.getElementById('data2').innerHTML = statedata2
+
+        let aliveData = '<h3 style="font-weight: normal">Jeszcze żywi</h3><table style="margin: 0 auto">';
+        fetch('./alive.php').then((res) => {
+            return res.json();
+        }).then((json) => {
+            for (let person of json) {
+                aliveData += `<tr><td>${person.name}</td><td>${person.killCount}</td></tr>`;
+                document.getElementById('aliveData').innerHTML = aliveData
             }
-            statedata2 = +'</table>'
+            aliveData += '</table>'
         })
     }
 </script>
