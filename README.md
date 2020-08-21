@@ -49,7 +49,7 @@ W razie czego zostawiamy mistrzowi gry dostęp do pliku `list.html` zawierające
 W ostateczności można kontaktować się z którymś z autorów
 
 #### Bezpieczeństwo
-Plik `.htaccess` zawiera zasady bezpieczeństwa blokujące dostęp do plików `data.json` oraz `killed.json` jednakże nie jest on kompatybilny z każdym serwerem (z serwerem pzbs jest) i może wystąpić potrzeba zastąpienia go odpowiednią metodą blokowania możliwości odczytu danych
+Plik `.htaccess` zawiera zasady bezpieczeństwa blokujące dostęp do plików `data.json` oraz `killed.json` jednakże nie jest on kompatybilny z każdym serwerem (z serwerem pzbs jest) i może wystąpić potrzeba zastąpienia go odpowiednią metodą blokowania możliwości odczytu danych.
 Jeżeli nie masz pojęcia jak to zrobić a domyślna metoda nie działa możesz:
 
 - Wyszukać metodę blokowania dostępu do plików (ex. `how to protect file from read <nazwa twojego serwera>`)
@@ -64,7 +64,7 @@ Zachęcamy również do ulepszania tego projektu i dodawania nowych funkcji, jed
 
 # Licencja
 Udostępniamy naszego serwerowego killera głównie z myślą o kolejnych osobach prowadzących obozy brydżowe w Stasikówce,
-ale każdy kto chce może z niego korzystać. Wystarczy trzymać się zasad licencji GNU GPL3
+ale każdy kto chce może z niego korzystać. Wystarczy trzymać się zasad licencji GNU GPL3.
 Jej szczegóły znajdziesz w pliku `LICENSE`
 
 

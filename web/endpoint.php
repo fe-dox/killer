@@ -2,7 +2,7 @@
 /**
  *     Plik endpoint.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 15/08/2019, 23:27  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 21/08/2019, 09:39  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -24,10 +24,16 @@ $json_data = json_decode($json, true);
 $player = $json_data[$code];
 if ($player == null) {
     echo "{\"name\":false}";
-}else if ($code == $player["code"]) {
+} else if ($player["isDead"] == true) {
+    $kill = 0;
+    $name = $player["name"];
+    $killCount = $player["killCount"];
+    $isDead = $player["isDead"];
+    echo "{\"kill\":\"$kill\",\"name\":\"$name\",\"killCount\":\"$killCount\",\"isDead\":$isDead}";
+} else if ($code == $player["code"]) {
     $kill = $player["kill"];
     $name = $player["name"];
     $killCount = $player["killCount"];
-    echo "{\"kill\":\"$kill\",\"name\":\"$name\",\"killCount\":\"$killCount\"}";
+    echo "{\"kill\":\"$kill\",\"name\":\"$name\",\"killCount\":\"$killCount\",\"isDead\":false}";
     $found = true;
 }
