@@ -1,8 +1,8 @@
 <?php
-/**
+/*
  *     Plik kill.php jest częścią projektu Killer System - Prostego narzędzia do prowadzenia gry w killera
  *     Kod źródłowy: https://bitbucket.org/fedox8/boom-killer/src
- *     Copyright (C) 20/08/2019, 20:41  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
+ *     Copyright (C) 21/08/2020, 12:03  Mikołaj Bogucki, Jeremiasz Mazur, Anna Basiura
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -17,12 +17,15 @@
  *     You should have received a copy of the GNU General Public License
  *     along with this file.  If not, see https://www.gnu.org/licenses/.
  */
+include "Backup.php";
 
 $code = $_GET["code"];
 $target = $_GET["target"];
 
 $json = file_get_contents("data.json");
 $json_data = json_decode($json,true);
+
+backup("kill");
 
 $player = $json_data[$code];
 if($player == null){
